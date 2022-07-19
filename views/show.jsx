@@ -4,17 +4,6 @@ const Default = require('./layouts/default')
 function Show ({bread}) {
     return (
         <Default>
-            <body>
-                <div className="wrapper">
-                    <header>
-                        <h1><a href="/breads">BreadCRUD</a></h1>
-                    </header>
-                    <div className="container">
-                        {html.children}
-                    </div>
-                </div>
-            </body>
-
             <h3>{bread.name}</h3>
             <p>
                 and it
