@@ -2,6 +2,7 @@
 const express = require ('express')
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
+const {Schema} = mongoose
 //Configuration
 require('dotenv').config()
 const PORT = process.env.PORT
