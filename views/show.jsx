@@ -14,10 +14,10 @@ function Show ({bread, id}) {
                 have gluten.
             </p>
             <img src={bread.img} alt={bread.name}/>
-            <form action={`/breads/${id}?_method=DELETE`} method="POST">
+            <form action={`/breads/${bread.id}?_method=DELETE`} method="POST">
                 <input type='submit' value="DELETE"/>
             </form>
-            <a href={`/breads/${id}/edit`}><button>Edit</button></a>
+            <a href={`/breads/${bread.id}/edit`}><button>Edit</button></a>
             <li><a href="/breads">Go home</a></li>
         </Default>
     )
