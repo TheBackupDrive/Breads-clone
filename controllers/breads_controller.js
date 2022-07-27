@@ -29,12 +29,14 @@ breads.get('/:id/edit', (req, res) => {
 breads.get('/:id', (req, res) => {
     Bread.findById(req.params.id)
         .then(foundBread => {
+            const bakedBy = foundBread.getBakedBy()
+            console.log(bakedBy)
             res.render('show', {
                 bread: foundBread
             })
         })
-    .catch(err => {
-        res.send('404')
+        .catch(err => {
+            res.send('404')
     })
 })
 
@@ -78,7 +80,11 @@ breads.post('/', (req, res) => {
     }
     Bread.create(req.body)
     res.redirect('/breads')
-  })
+
+    .catch(err => {
+        res.send('404')
+    })
+})
 // DELETE
 breads.delete('/:id', (req, res) => {
     Bread.findByIdAndDelete(req.params.id)
