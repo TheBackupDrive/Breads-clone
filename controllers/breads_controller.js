@@ -2,32 +2,47 @@ const express = require('express')
 const req = require('express/lib/request')
 const breads = express.Router()
 const Bread = require('../models/bread')
+const Baker = require('../models/baker')
 // INDEX
 breads.get('/', (req, res) => {
+    Baker.find()
+        .then(foundBakers => {
     Bread.find()
         .then(foundBreads => {
             res.render('Index', {
             breads: foundBreads,
-            title: 'Index Page',
+            bakers: foundBakers,
+            title: 'Index Page'
+            })
+        })
     })
-  })
 })
 // NEW
 breads.get('/new', (req, res) => {
-    res.render('New')
+    Baker.find()
+        .then(foundBakers => {
+            res.render('New', {
+            bakers: foundBakers
+        })
+    })
 })
 // EDIT
 breads.get('/:id/edit', (req, res) => {
+    Baker.find()
+        .then(foundBakers => {
     Bread.findById(req.params.id)
         .then(foundBread => {
             res.render('edit', {
-             bread: foundBread
-         })
+             bread: foundBread,
+             bakers: foundBakers
+             })
+        })
     })
 })
 // SHOW
 breads.get('/:id', (req, res) => {
     Bread.findById(req.params.id)
+        .populate('baker')
         .then(foundBread => {
             const bakedBy = foundBread.getBakedBy()
             console.log(bakedBy)
@@ -106,6 +121,5 @@ breads.put('/:id', (req, res) => {
         res.redirect(`/breads/${req.params.id}`)
     })
 })
-
 
 module.exports = breads
