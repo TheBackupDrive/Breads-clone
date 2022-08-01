@@ -15,7 +15,10 @@ baker.get('/', (req, res) => {
 // Show
 baker.get('/:id', (req, res) => {
     Baker.findById(req.params.id)
-        .populate('breads')
+        .populate({
+           path: 'breads',
+           options: {limit: 4}
+        })
         .then(foundBaker => {
             res.render('bakerShow', {
                 baker: foundBaker
@@ -35,7 +38,5 @@ baker.get('/data/seed', (req, res) => {
     Baker.insertMany(bakerSeedData)
         .then(res.redirect('/breads'))
 })
-
-
 
 module.exports = baker                  
