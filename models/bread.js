@@ -17,15 +17,10 @@ const breadSchema = new Schema({
 //   return this.find(`${this.baker}`)
 // }
 
-//Helper Methods
-breadSchema.methods.getBakedBy = function () {
-  return `${this.name} was baked with love by ${this.baker}`
+// // Helper method
+breadSchema.methods.getBakedBy = function(){
+  return `${this.name} was baked with love by ${this.baker.name}, who has been with us since ${this.baker.startDate}`
 }
-
-// // Helper method that needs to work / be added
-// breadSchema.methods.getBakedBy = function(){
-//   return `${this.name} was baked with love by ${this.baker.name}, who has been with us since ${this.baker.startDate.getFullYear()}`
-// }
 
 
 const Bread = mongoose.model('Bread', breadSchema)
